@@ -90,12 +90,4 @@ describe("Test login", () => {
         cy.get("h3[data-test='error']").should("have.text", "Epic sadface: Sorry, this user has been locked out.");
     });
 
-    it("Try to login with locked user", () => {
-        cy.get("input#user-name").type(lockedOutUser.username);
-        cy.get("input#password").type(lockedOutUser.password);
-        cy.get("input#login-button").click();
-        cy.get("input#user-name + svg[data-icon='times-circle']").should("be.visible");
-        cy.get("input#password + svg[data-icon='times-circle']").should("be.visible");
-        cy.get("h3[data-test='error']").should("have.text", "Epic sadface: Sorry, this user has been locked out.");
-    });
 });
