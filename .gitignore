@@ -1,0 +1,14 @@
+/node_modules
+/.DS_Store
+/.vscode
+/dist
+/build
+/.env
+/.env.local
+/.env.development
+/.env.production
+/.env.test
+/.idea
+/.eslintcache
+/.prettiercache
+/.next                          
