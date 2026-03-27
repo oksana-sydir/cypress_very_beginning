@@ -1,0 +1,6 @@
+{
+  "passwordIsRequired": "Epic sadface: Password is required",
+  "usernameIsRequired": "Epic sadface: Username is required",
+  "invalidUsernameAndPassword": "Epic sadface: Username and password do not match any user in this service",
+  "lockedOutUserError": "Epic sadface: Sorry, this user has been locked out."
+}

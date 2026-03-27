@@ -1,15 +1,10 @@
-// import { describe } from "mocha";
-// const { before } = require("mocha");
-
-// describe("My First Test", () => {
-//   it("Search field should be visible for Google.com", () => {
-//     cy.visit("https://www.google.com/")
-//     cy.get('textarea[name="q"]').should("be.visible")
-//     cy.get('textarea[name="q"]').type("Cypress Testing{enter}", { force: true })
-//   });
-// });
 import {standardUser, lockedOutUser} from "../fixtures/users";
-
+import {
+    passwordIsRequired,
+    usernameIsRequired,
+    invalidUsernameAndPassword,
+    lockedOutUserError,
+} from "../fixtures/errorMessages.json";
 describe("Test login", () => {
     beforeEach(() => {
         cy.visit("/");
@@ -28,17 +23,14 @@ describe("Test login", () => {
         cy.get("input#login-button").click();
         cy.get("input#user-name + svg[data-icon='times-circle']").should("be.visible");
         cy.get("input#password + svg[data-icon='times-circle']").should("be.visible");
-        cy.get("h3[data-test='error']").should(
-            "have.text",
-            "Epic sadface: Username and password do not match any user in this service"
-        );
+        cy.get("h3[data-test='error']").should("have.text", invalidUsernameAndPassword);
     });
 
     it("Try to login with empty login and password", () => {
         cy.get("input#login-button").click();
         cy.get("input#user-name + svg[data-icon='times-circle']").should("be.visible");
         cy.get("input#password + svg[data-icon='times-circle']").should("be.visible");
-        cy.get("h3[data-test='error']").should("have.text", "Epic sadface: Username is required");
+        cy.get("h3[data-test='error']").should("have.text", usernameIsRequired);
     });
 
     it("Try to login with empty password", () => {
@@ -46,7 +38,7 @@ describe("Test login", () => {
         cy.get("input#login-button").click();
         cy.get("input#user-name + svg[data-icon='times-circle']").should("be.visible");
         cy.get("input#password + svg[data-icon='times-circle']").should("be.visible");
-        cy.get("h3[data-test='error']").should("have.text", "Epic sadface: Password is required");
+        cy.get("h3[data-test='error']").should("have.text", passwordIsRequired);
     });
 
     it("Try to login with empty username", () => {
@@ -54,7 +46,7 @@ describe("Test login", () => {
         cy.get("input#login-button").click();
         cy.get("input#user-name + svg[data-icon='times-circle']").should("be.visible");
         cy.get("input#password + svg[data-icon='times-circle']").should("be.visible");
-        cy.get("h3[data-test='error']").should("have.text", "Epic sadface: Username is required");
+        cy.get("h3[data-test='error']").should("have.text", usernameIsRequired);
     });
 
     it("Try to login with valid login and invalid password", () => {
@@ -63,10 +55,7 @@ describe("Test login", () => {
         cy.get("input#login-button").click();
         cy.get("input#user-name + svg[data-icon='times-circle']").should("be.visible");
         cy.get("input#password + svg[data-icon='times-circle']").should("be.visible");
-        cy.get("h3[data-test='error']").should(
-            "have.text",
-            "Epic sadface: Username and password do not match any user in this service"
-        );
+        cy.get("h3[data-test='error']").should("have.text", invalidUsernameAndPassword);
     });
 
     it("Try to login with invalid login and valid password", () => {
@@ -75,10 +64,7 @@ describe("Test login", () => {
         cy.get("input#login-button").click();
         cy.get("input#user-name + svg[data-icon='times-circle']").should("be.visible");
         cy.get("input#password + svg[data-icon='times-circle']").should("be.visible");
-        cy.get("h3[data-test='error']").should(
-            "have.text",
-            "Epic sadface: Username and password do not match any user in this service"
-        );
+        cy.get("h3[data-test='error']").should("have.text", invalidUsernameAndPassword);
     });
 
     it("Try to login with locked user", () => {
@@ -87,7 +73,6 @@ describe("Test login", () => {
         cy.get("input#login-button").click();
         cy.get("input#user-name + svg[data-icon='times-circle']").should("be.visible");
         cy.get("input#password + svg[data-icon='times-circle']").should("be.visible");
-        cy.get("h3[data-test='error']").should("have.text", "Epic sadface: Sorry, this user has been locked out.");
+        cy.get("h3[data-test='error']").should("have.text", lockedOutUserError);
     });
-
 });
