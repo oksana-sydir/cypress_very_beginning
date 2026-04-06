@@ -13,6 +13,7 @@ describe("Test login", () => {
         cy.get("input#user-name").type(standardUser.username);
         cy.get("input#password").type(standardUser.password);
         cy.get("input#login-button").click();
+        cy.screenshot();
         cy.url().should("include", "inventory.html");
         cy.get("span.title").should("have.text", "Products");
     });
