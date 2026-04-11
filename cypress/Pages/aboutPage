@@ -1,0 +1,21 @@
+///<reference types="cypress" />
+
+class AboutPage {
+    // Getters for selectors
+    get pageTitle() {
+        return "h1";
+    }
+
+    get pageUrl() {
+        return "https://saucelabs.com/";
+    }
+
+    verifyAboutPage() {
+        cy.origin("https://saucelabs.com/", () => {
+            cy.location("href").should("include", "saucelabs.com");
+            cy.get("h1").should("have.text", "The World's Only Full-Lifecycle AI-Quality Platform");
+        });
+    }
+}
+
+export default new AboutPage();
