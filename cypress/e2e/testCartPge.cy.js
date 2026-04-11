@@ -8,15 +8,15 @@ import cartPage from "../pages/cartPage";
 describe("Add Product to Cart test", () => {
     beforeEach(() => {
         LoginPage.visit();
-        LoginPage.fillUsername(standardUser.userName);
-        LoginPage.fillPassword(standardUser.password);
+        LoginPage.fillUsernameField(standardUser.userName);
+        LoginPage.fillPasswordField(standardUser.password);
         LoginPage.submit();
-        Cart.verifyCartIsOpened();
+        ProductListingPage.verifyProductListingPage();
         ProductListingPage.addToCart("sauce-labs-backpack");
     });
-    
+
     it("Check the counter near the cart", () => {
-        Cart.verifyCounterAfterAddingProduct("sauce-labs-backpack", 1)
+        CartPage.verifyCounterAfterAddingProduct("sauce-labs-backpack", 1)
     });
 
     it("Open the cart and check the product", () => {
